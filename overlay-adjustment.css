@@ -1,11 +1,11 @@
 developers can create this code as per their need and if a object is double in a webpage refer thim like this
-.table1(iframe1.html){
+.table1-iframe1html {
 }
-.table2(iframe1.html){
+.table2-iframe1html {
 }
 
 and if a object is same in two different webpages 
-.table1(iframe1.html){
+.table1-iframe1html {
 }
-.table1(iframe2.html){
+.table1-iframe2html {
 }
