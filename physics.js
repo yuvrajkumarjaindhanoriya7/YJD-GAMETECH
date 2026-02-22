@@ -1,4 +1,4 @@
-// for gravity (developer can edit this for throw)
+// for gravity (developer can edit this according to his need
 let obj = document.getElementById("object");
 
 let position = 0;
