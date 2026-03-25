@@ -23,39 +23,18 @@
             border: none;
         }
 
-        /* Clickable edge zones */
-        .edge {
-            position: absolute;
-            z-index: 999;
-            background: rgba(0, 0, 0, 0.05); /* Very light tint so you can see where to click */
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .edge:hover {
-            background: rgba(0, 0, 0, 0.2); /* Darkens when you hover over the edge */
-        }
-
-        /* Positioning the 4 zones */
-        .top    { top: 0; left: 0; width: 100%; height: 60px; }
-        .bottom { bottom: 0; left: 0; width: 100%; height: 60px; }
-        .left   { top: 60px; left: 0; width: 60px; height: calc(100% - 120px); }
-        .right  { top: 60px; right: 0; width: 60px; height: calc(100% - 120px); }
+     
     </style>
 </head>
 <body>
 
 <div class="iframe-container">
-    <div class="edge top" onclick="rotateIframe('top')"></div>
-    <div class="edge bottom" onclick="rotateIframe('bottom')"></div>
-    <div class="edge left" onclick="rotateIframe('left')"></div>
-    <div class="edge right" onclick="rotateIframe('right')"></div>
-
+  
     <iframe src="_____________________.html"id="myIframe">
     </iframe>
 </div>
 
 
-<script src="script.js">
+<script src="Engine.js">
 </script></body>
 </html>
