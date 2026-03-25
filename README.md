@@ -1,4 +1,4 @@
-# 🎮 Unified JS Game Engine (Physics + Day/Night + Map System)
+# 🎮 Manohari Game Engine (Physics + Day/Night + Map System)
 
 A lightweight and powerful JavaScript game engine that combines **HTML5 Canvas** and **Iframes** to create a dynamic, living world. This engine features physics-based movement, an automatic day-night cycle, and an intelligent map-switching system.
 
