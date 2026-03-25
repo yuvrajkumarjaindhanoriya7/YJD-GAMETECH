@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #000; }
+
+  .game-world {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    perspective: 1200px;
+  }
+
+  /* The Main Background */
+  #bg-layer {
+    position: absolute;
+    width: 110%;
+    height: 110%;
+    top: -5%;
+    left: -5%;
+    background-image: url('___________________________________________');
+    background-size: cover;
+    z-index: 1;
+    transition: transform 0.1s ease-out;
+  }
+
+  /* The Interactive Chest Button */
+  .hotspot {
+    position: absolute;
+    z-index: 10;
+    width: 80px; /* Small icon size */
+    cursor: pointer;
+    transition: transform 0.1s ease-out, filter 0.2s;
+    
+    /* Position it in the "world" */
+    left: 60%; 
+    top: 70%;
+  }
+
+  .hotspot:hover {
+    filter: brightness(1.5) drop-shadow(0 0 10px gold);
+    transform: scale(1.2) !important; /* Pop up on hover */
+  }
+
+  .hotspot img { width: 100%; }
+</style>
+</head>
+<body>
+
+<div class="game-world" id="world">
+  <div id="bg-layer"></div>
+
+  <a href="https://www.amazon.com" target="_blank" class="hotspot" id="_____">
+    <img src="___________________" alt="____________">
+  </a>
+</div>
+
+<script>
+  const world = document.getElementById('world');
+  const bg = document.getElementById('bg-layer');
+  const chest = document.getElementById('chest');
+
+  world.addEventListener('mousemove', (e) => {
+    const xPct = (e.clientX / window.innerWidth) - 0.5;
+    const yPct = (e.clientY / window.innerHeight) - 0.5;
+
+    // Move Background
+    const moveX = xPct * -50;
+    const moveY = yPct * -30;
+    const rotY = xPct * 10;
+    bg.style.transform = `translate(${moveX}px, ${moveY}px) rotateY(${rotY}deg)`;
+
+    // Move Chest (Slightly different values to keep it locked to the floor)
+    const chestX = xPct * -50; 
+    const chestY = yPct * -30;
+    chest.style.transform = `translate(${chestX}px, ${chestY}px) rotateY(${rotY}deg)`;
+  });
+</script>
+
+</body>
+</html>
