@@ -40,7 +40,6 @@ To ensure the automatic systems work correctly, use the following naming format 
 
 | Key | Action |
 | :--- | :--- |
-| **Space** | Jump / Throw Object |
 | **W /A / S / D** | Change Map (forward/Left / Backward / Right) |
 
 ---
