@@ -1,3 +1,6 @@
+// add this code in iframe if you want to create animation in iframe 
+
+
 const imageContainer = document.getElementById('myImage');
 const imageUrls = [
   'image1.jpg',
