@@ -1,51 +1,62 @@
-// add this code in iframe if you want to create animation in iframe 
-
-
-const imageContainer = document.getElementById('myImage');
-const imageUrls = [
-  'image1.jpg',
-  'image2.jpg',
-  'image3.jpg'
-  // Add as many as you need
-];
-
-let currentIndex = 0;
-let preloadedImages = [];
-let loadedCount = 0;
-
-// 1. The Preloading Function
-function preloadImages(urls, callback) {
-  urls.forEach((url, index) => {
-    const img = new Image();
-    img.src = url;
-    
-    img.onload = () => {
-      preloadedImages[index] = img; // Store the actual image object
-      loadedCount++;
-      
-      // Check if all images are done
-      if (loadedCount === urls.length) {
-        callback();
-      }
-    };
-
-    img.onerror = () => {
-      console.error("Failed to load image at: " + url);
-    };
-  });
+<html>
+<head>
+<style>
+.slideshow {
+  position: relative;
+  width: 100%; 
+  height: 400px; /* Adjust based on your needs */
 }
 
-// 2. The Animation Function
-function startAnimation() {
-  console.log("All images loaded. Starting animation...");
-  
-  setInterval(() => {
-    // We update the 'src' of our visible <img> using the preloaded cache
-    imageContainer.src = preloadedImages[currentIndex].src;
-    
-    currentIndex = (currentIndex + 1) % preloadedImages.length;
-  }, 100); // 100ms = 10 frames per second
+.slideshow img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  /* Total duration = 100ms (10 images * 10ms) */
+  animation: fastFlip 0.1s infinite;
 }
 
-// 3. Kick it off
-preloadImages(imageUrls, startAnimation);
+/* Staggering the animation by 10ms (0.01s) for each image */
+.slideshow img:nth-child(1) { animation-delay: 0s; }
+.slideshow img:nth-child(2) { animation-delay: 0.01s; }
+.slideshow img:nth-child(3) { animation-delay: 0.02s; }
+.slideshow img:nth-child(4) { animation-delay: 0.03s; }
+.slideshow img:nth-child(5) { animation-delay: 0.04s; }
+.slideshow img:nth-child(6) { animation-delay: 0.05s; }
+.slideshow img:nth-child(7) { animation-delay: 0.06s; }
+.slideshow img:nth-child(8) { animation-delay: 0.07s; }
+.slideshow img:nth-child(9) { animation-delay: 0.08s; }
+.slideshow img:nth-child(10) { animation-delay: 0.09s; }
+
+@keyframes fastFlip {
+  0% {
+    opacity: 0;
+  }
+  /* The image becomes visible for its exact 10% slice of time */
+  1%, 10% {
+    opacity: 1;
+  }
+  11%, 100% {
+    opacity: 0;
+  }
+}
+
+</style>
+</head>
+<body>
+<div class="slideshow">
+  <img src="img1.jpg" alt="Image 1">
+  <img src="img2.jpg" alt="Image 2">
+  <img src="img3.jpg" alt="Image 3">
+  <img src="img4.jpg" alt="Image 4">
+  <img src="img5.jpg" alt="Image 5">
+  <img src="img6.jpg" alt="Image 6">
+  <img src="img7.jpg" alt="Image 7">
+  <img src="img8.jpg" alt="Image 8">
+  <img src="img9.jpg" alt="Image 9">
+  <img src="img10.jpg" alt="Image 10">
+</div>
+</body></html>
+
