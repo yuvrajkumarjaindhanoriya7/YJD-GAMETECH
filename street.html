@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>street.html</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:ui-monospace,Menlo,monospace}
+#main-image{width:100%;height:100%;object-fit:cover;display:block}
+.hint{position:absolute;left:12px;bottom:12px;background:rgba(0,0,0,.6);color:#fff;padding:6px 10px;border-radius:6px;font-size:13px;line-height:1.4}
+.hint b{color:#ffd84a}
+.place{position:absolute;left:12px;top:12px;color:#fff;background:rgba(0,0,0,.55);padding:4px 10px;border-radius:6px;font-size:13px}
+@media (max-width:520px){.place{display:none}.hint{font-size:11px;padding:4px 7px;left:6px;bottom:6px}}
+</style></head><body>
+<img id="main-image" src="frames/street-day1.svg" alt="street.html scene">
+<div class="place">street.html</div>
+<div class="hint"><b>W</b> park &nbsp; <b>A</b> sidewalk</div>
+<script src="animation.js"></script>
+<script>
+let msgTime="day"; addEventListener("message",e=>{ if(e.data&&e.data.yjdTime) msgTime=e.data.yjdTime; });
+setInterval(()=>{ try{ parent.getGameTime(); }catch(e){ parent.postMessage({yjdAsk:"time"},"*"); } },500);
+function getGameTime(){ try { return window.parent.getGameTime(); } catch(e){ return msgTime; } }
+const framesByTime = {
+  day:["frames/street-day1.svg","frames/street-day2.svg","frames/street-day3.svg","frames/street-day4.svg"],
+  evening:["frames/street-evening1.svg","frames/street-evening2.svg","frames/street-evening3.svg","frames/street-evening4.svg"],
+  night:["frames/street-night1.svg","frames/street-night2.svg","frames/street-night3.svg","frames/street-night4.svg"]
+};
+let lastTime = getGameTime();
+let stop = playAnimation("main-image", framesByTime[lastTime], 300);
+setInterval(()=>{ const now=getGameTime(); if(now!==lastTime){ lastTime=now; stop&&stop(); stop=playAnimation("main-image", framesByTime[now], 300);} },1000);
+</script>
+<script>
+(function(){ var direct=false; try{ direct=!!parent.document && parent!==window; }catch(e){}
+  if(!direct && parent!==window){ addEventListener('keydown',function(e){ parent.postMessage({yjdKey:e.key},'*'); }); } })();
+</script>
+</body></html>

@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="night">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Codes — YJD GameTech</title>
+<meta name="description" content="Copy game.html, chunk.html and engine.js for the Manohari game engine.">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('yjd-theme')||'night'}catch(e){}</script>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>YJD GameTech <small>/ Manohari</small></a>
+    <nav class="links" aria-label="Main">
+      <a href="index.html" >Home</a>
+      <a href="codes.html" aria-current="page">Codes</a>
+      <a href="animation.html" >Animation</a>
+    </nav>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch day or night theme">☾ Night</button>
+  </div>
+</header>
+<main>
+
+<div class="wrap">
+  <div class="page-head">
+    <p class="eyebrow">Codes</p>
+    <h1>The three files of every game</h1>
+    <p>Each file has a <b>Ready to use</b> version, with bugs fixed and comments added, and <b>Your original</b> version, exactly as written. Copy one or download it straight into your project folder.</p>
+  </div>
+  <div class="doc">
+    <nav class="toc" aria-label="Files">
+      <div class="t">Files</div>
+      <a href="#game">game.html</a>
+      <a href="#chunk">chunk.html</a>
+      <a href="#engine">engine.js</a>
+    </nav>
+    <div class="doc-body">
+
+      <section id="game">
+        <p class="eyebrow">File 1</p>
+        <h2>game.html</h2>
+        <p class="muted">The game window. It holds the iframe that shows the current map and loads the engine. Open this file to play.</p>
+        <div class="file-meta">
+          <div class="tabs" data-tabs role="tablist">
+            <button role="tab" aria-selected="true" aria-controls="game-a">Ready to use</button>
+            <button role="tab" aria-selected="false" aria-controls="game-b">Your original</button>
+          </div>
+        </div>
+        <div class="panel" id="game-a" role="tabpanel"><div class="code"><div class="code-head"><span class="fname">game.html</span><button type="button" data-copy>Copy</button><button type="button" data-download="game.html">Download</button></div><pre><code class="language-markup">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;My YJD GameTech Game&lt;/title&gt;
+    &lt;style&gt;
+        html, body {
+            margin: 0;
+            height: 100%;
+            background: #000;
+            display: grid;
+            place-items: center;
+        }
+
+        /* Container that holds the map (chunk) iframe */
+        .iframe-container {
+            position: relative;
+            width: min(1450px, 100vw);
+            aspect-ratio: 2 / 1;          /* same shape as 1450 x 725 */
+            max-height: 100vh;
+            border: 2px solid #333;
+            overflow: hidden;
+        }
+
+        #myIframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            transition: opacity 0.2s;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;div class=&quot;iframe-container&quot;&gt;
+    &lt;!-- Put the FIRST map of your game here --&gt;
+    &lt;iframe src=&quot;street.html&quot; id=&quot;myIframe&quot; title=&quot;Game world&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;!-- File name must match exactly (engine.js vs Engine.js matters online) --&gt;
+&lt;script src=&quot;engine.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+        <div class="panel" id="game-b" role="tabpanel" hidden><div class="code"><div class="code-head"><span class="fname">game.html (original)</span><button type="button" data-copy>Copy</button><button type="button" data-download="game.html">Download</button></div><pre><code class="language-markup">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+    &lt;style&gt;
+        /* Container to hold the iframe and the clickable zones */
+        .iframe-container {
+            position: relative;
+            display: inline-block;
+            /* Using your specific dimensions */
+            height: 725px; 
+            width: 1450px;
+            border: 2px solid #333;
+            overflow: hidden;
+        }
+
+        #myIframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;div class=&quot;iframe-container&quot;&gt;
+
+    &lt;iframe src=&quot;_____________________.html&quot;id=&quot;myIframe&quot;&gt;
+    &lt;/iframe&gt;
+&lt;/div&gt;
+
+
+&lt;script src=&quot;Engine.js&quot;&gt;
+&lt;/script&gt;&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+        <div class="fixes"><h4>What changed</h4><ul>
+          <li>The placeholder <code>_____________________.html</code> is now <code>street.html</code>. Put your first map here.</li>
+          <li>Added the missing space in <code>.html"id=</code>, so the attribute is read reliably.</li>
+          <li><code>Engine.js</code> is now <code>engine.js</code>. Web servers care about capital letters, so the name must match the file exactly.</li>
+          <li>The fixed 1450 × 725 box now keeps the same 2:1 shape but shrinks to fit smaller screens.</li>
+        </ul></div>
+      </section>
+
+      <section id="chunk">
+        <p class="eyebrow">File 2</p>
+        <h2>chunk.html</h2>
+        <p class="muted">A template for one map. Copy it once for each place, rename it (<code>street.html</code>, <code>park.html</code>…) and swap in your images. The images play one after another to animate the scene.</p>
+        <div class="file-meta">
+          <div class="tabs" data-tabs role="tablist">
+            <button role="tab" aria-selected="true" aria-controls="chunk-a">Ready to use</button>
+            <button role="tab" aria-selected="false" aria-controls="chunk-b">Your original</button>
+          </div>
+        </div>
+        <div class="panel" id="chunk-a" role="tabpanel"><div class="code"><div class="code-head"><span class="fname">chunk.html</span><button type="button" data-copy>Copy</button><button type="button" data-download="chunk.html">Download</button></div><pre><code class="language-markup">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+&lt;title&gt;street.html — map chunk&lt;/title&gt;
+
+&lt;style&gt;
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: black;
+}
+
+#animation-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+#main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+&lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;div id=&quot;animation-container&quot;&gt;
+    &lt;img id=&quot;main-image&quot; src=&quot;image1.jpg&quot; alt=&quot;Street scene&quot;&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+// Frames of this map, in order
+const images = [
+    &quot;image1.jpg&quot;,
+    &quot;image2.jpg&quot;,
+    &quot;image3.jpg&quot;,
+    &quot;image4.jpg&quot;
+];
+
+let currentFrame = 0;
+const frameSpeed = 500; // milliseconds per frame (500 = 2 frames per second)
+
+const mainImage = document.getElementById(&quot;main-image&quot;);
+
+// Preload every frame so the animation never flickers
+images.forEach(src =&gt; { const img = new Image(); img.src = src; });
+
+function animateImages() {
+    mainImage.src = images[currentFrame];
+    currentFrame = (currentFrame + 1) % images.length; // loop back to 0
+}
+
+setInterval(animateImages, frameSpeed);
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+        <div class="panel" id="chunk-b" role="tabpanel" hidden><div class="code"><div class="code-head"><span class="fname">chunk.html (original)</span><button type="button" data-copy>Copy</button><button type="button" data-download="chunk.html">Download</button></div><pre><code class="language-markup">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+
+&lt;title&gt;2D Image Animation&lt;/title&gt;
+
+&lt;style&gt;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: black;
+}
+
+#animation-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+#main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+&lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;div id=&quot;animation-container&quot;&gt;
+
+    &lt;img id=&quot;main-image&quot; src=&quot;image1.jpg&quot; alt=&quot;Animation&quot;&gt;
+
+&lt;/div&gt;
+
+&lt;script&gt;
+
+// Images used in animation
+const images = [
+    &quot;image1.jpg&quot;,
+    &quot;image2.jpg&quot;,
+    &quot;image3.jpg&quot;,
+    &quot;image4.jpg&quot;
+];
+
+// Animation settings
+let currentFrame = 0;
+let frameSpeed = 500; // milliseconds
+
+const mainImage = document.getElementById(&quot;main-image&quot;);
+
+// Display images one after another
+function animateImages() {
+
+    mainImage.src = images[currentFrame];
+
+    currentFrame++;
+
+    if (currentFrame &gt;= images.length) {
+        currentFrame = 0;
+    }
+
+}
+
+// Start animation
+setInterval(animateImages, frameSpeed);
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div></div>
+        <div class="fixes"><h4>What changed</h4><ul>
+          <li>Your original works as written. The ready version adds image preloading so frames don't flicker on first play.</li>
+          <li>The loop counter is shortened to <code>(currentFrame + 1) % images.length</code>. It does the same thing in one line.</li>
+          <li>Added <code>lang</code> and a clearer <code>alt</code> text for accessibility.</li>
+        </ul></div>
+      </section>
+
+      <section id="engine">
+        <p class="eyebrow">File 3</p>
+        <h2>engine.js</h2>
+        <p class="muted">The brain of the game. It stores the maps for each time of day and each story state, cycles the time, and moves the player when they press W A S D.</p>
+        <div class="file-meta">
+          <div class="tabs" data-tabs role="tablist">
+            <button role="tab" aria-selected="true" aria-controls="engine-a">Ready to use</button>
+            <button role="tab" aria-selected="false" aria-controls="engine-b">Your original</button>
+          </div>
+        </div>
+        <div class="panel" id="engine-a" role="tabpanel"><div class="code"><div class="code-head"><span class="fname">engine.js</span><button type="button" data-copy>Copy</button><button type="button" data-download="engine.js">Download</button></div><pre><code class="language-javascript">// =============================================================
+//  YJD GameTech · Manohari Engine — engine.js
+// =============================================================
+
+// ---- TIME HELPERS -------------------------------------------
+// 1 second = 1000 milliseconds
+const MINUTE    = 1000 * 60;            // &quot;1 minute&quot;
+const DAY_IN_MS = 1000 * 60 * 60 * 24;  // &quot;24 hours&quot;
+const TIME_STEP = MINUTE;               // how long each time of day lasts
+
+
+// ---- 1. GLOBAL STATE ----------------------------------------
+let currentTime = &quot;day&quot;;   // &quot;day&quot; | &quot;evening&quot; | &quot;night&quot;
+let stateone    = false;   // story switch (e.g. the car has crashed)
+// You can add more states: let statetwo = false; ...
+
+// Optional: flip a state automatically after some time
+// setTimeout(() =&gt; { stateone = true; }, MINUTE);
+
+
+// ---- 2. NORMAL MAPS (Clean City) ----------------------------
+// &quot;current file&quot;: { key: &quot;next file&quot; }
+const dayMap = {
+    &quot;street.html&quot;:   { w: &quot;park.html&quot;, a: &quot;sidewalk.html&quot; },
+    &quot;park.html&quot;:     { s: &quot;street.html&quot; },
+    &quot;sidewalk.html&quot;: { d: &quot;street.html&quot; }
+};
+
+const eveningMap = {
+    &quot;street.html&quot;:       { w: &quot;park_sunset.html&quot;, a: &quot;sidewalk.html&quot; },
+    &quot;park_sunset.html&quot;:  { s: &quot;street.html&quot; },
+    &quot;sidewalk.html&quot;:     { d: &quot;street.html&quot; }
+};
+
+const nightMap = {
+    &quot;street.html&quot;:      { w: &quot;park_night.html&quot;, a: &quot;sidewalk.html&quot; },
+    &quot;park_night.html&quot;:  { s: &quot;street.html&quot; },
+    &quot;sidewalk.html&quot;:    { d: &quot;street.html&quot; }
+};
+
+// Group the three maps by time so the engine can pick one
+const normalWorld = {
+    day:     dayMap,
+    evening: eveningMap,
+    night:   nightMap
+};
+
+
+// ---- 3. STATE MAPS (Post-Accident) --------------------------
+// Used when stateone === true. Same shape: time -&gt; file -&gt; key.
+const stateoneMaps = {
+    day:     { &quot;park.html&quot;:        { s: &quot;street_crashed.html&quot; },
+               &quot;street_crashed.html&quot;: { w: &quot;park.html&quot; } },
+    evening: { &quot;park_sunset.html&quot;: { s: &quot;street_crashed.html&quot; },
+               &quot;street_crashed.html&quot;: { w: &quot;park_sunset.html&quot; } },
+    night:   { &quot;park_night.html&quot;:  { s: &quot;street_crashed.html&quot; },
+               &quot;street_crashed.html&quot;: { w: &quot;park_night.html&quot; } }
+};
+
+
+// ---- 4. TIME CYCLE: day -&gt; evening -&gt; night -&gt; day ... -------
+const timeOrder = [&quot;day&quot;, &quot;evening&quot;, &quot;night&quot;]; // add more if you like
+
+// Let maps (chunks) ask the time: window.parent.getGameTime()
+window.getGameTime  = () =&gt; currentTime;
+window.getGameState = () =&gt; stateone;
+
+setInterval(() =&gt; {
+    const next = (timeOrder.indexOf(currentTime) + 1) % timeOrder.length;
+    currentTime = timeOrder[next];
+    console.log(&quot;Time is now:&quot;, currentTime);
+}, TIME_STEP); // time changes every TIME_STEP
+
+
+// ---- 5. HELPERS ---------------------------------------------
+function getCurrentFile(iframe) {
+    const path = iframe.getAttribute(&quot;src&quot;) || &quot;&quot;;
+    return decodeURIComponent(path.split(&quot;/&quot;).pop().split(&quot;?&quot;)[0]);
+}
+
+function applyEffect(frame) {
+    frame.style.opacity = &quot;0.7&quot;;
+    setTimeout(() =&gt; { frame.style.opacity = &quot;1&quot;; }, 200);
+}
+
+// Put special logic for the street here (sounds, pop-ups, etc.)
+function handleStreetEvents(key) {
+    // example: if (key === &quot;e&quot;) alert(&quot;You honk the horn!&quot;);
+}
+
+
+// ---- 6. KEYBOARD NAVIGATION ENGINE --------------------------
+function handleKey(event) {
+    const keyPressed = event.key.toLowerCase();
+    const iframe = document.getElementById(&quot;myIframe&quot;);
+    if (!iframe) return;
+
+    const currentFile = getCurrentFile(iframe);
+
+    // SYSTEM: special function when the player is on the street
+    if (currentFile === &quot;street.html&quot;) {
+        handleStreetEvents(keyPressed);
+    }
+
+    // STEP 1: pick the world (normal or state)
+    const currentWorld = stateone ? stateoneMaps : normalWorld;
+
+    // STEP 2: pick the map for the current TIME, then for this file
+    const timeSpecificMap = currentWorld[currentTime] || {};
+    const activeMap = timeSpecificMap[currentFile];
+
+    if (activeMap &amp;&amp; activeMap[keyPressed]) {
+
+        // SPECIAL TRIGGER: on the street + &#x27;w&#x27; -&gt; the car crashes
+        if (!stateone &amp;&amp; currentFile === &quot;street.html&quot; &amp;&amp; keyPressed === &quot;w&quot;) {
+            stateone = true;
+            console.log(&quot;CRASH DETECTED! Switching to stateoneMaps.&quot;);
+        }
+
+        iframe.src = activeMap[keyPressed];
+        applyEffect(iframe);
+    }
+}
+
+// Listen on the main page...
+window.addEventListener(&quot;keydown&quot;, handleKey);
+
+// ...and inside every map, so keys still work after the player
+// clicks on the game (clicking moves focus into the iframe)
+const gameFrame = document.getElementById(&quot;myIframe&quot;);
+function listenInsideMap() {
+    try {
+        gameFrame.contentWindow.addEventListener(&quot;keydown&quot;, handleKey);
+    } catch (e) {
+        // maps on another website cannot be listened to — keep them in the same folder
+    }
+}
+if (gameFrame) {
+    listenInsideMap();                                  // map that is already loaded
+    gameFrame.addEventListener(&quot;load&quot;, listenInsideMap); // every new map
+}
+
+// Maps can also send keys with postMessage (works even on hosts that
+// block direct access between frames):
+//   parent.postMessage({ yjdKey: event.key }, &quot;*&quot;);
+window.addEventListener(&quot;message&quot;, (e) =&gt; {
+    if (e.data &amp;&amp; typeof e.data.yjdKey === &quot;string&quot;) handleKey({ key: e.data.yjdKey });
+    if (e.data &amp;&amp; e.data.yjdAsk === &quot;time&quot; &amp;&amp; e.source) {
+        e.source.postMessage({ yjdTime: currentTime }, &quot;*&quot;);
+    }
+});</code></pre></div></div>
+        <div class="panel" id="engine-b" role="tabpanel" hidden><div class="code"><div class="code-head"><span class="fname">engine.js (original)</span><button type="button" data-copy>Copy</button><button type="button" data-download="engine.js">Download</button></div><pre><code class="language-javascript">// 1 second = 1000 milliseconds
+// This is much easier to read as &quot;1 minute&quot;
+setTimeout(() =&gt; {
+    stateone= true/false;
+}, 1000 * 60); 
+
+// This is clearly &quot;24 hours&quot;
+const DAY_IN_MS = 1000 * 60 * 60 * 24;
+
+
+// 1. GLOBAL STATE
+let currentTime = &quot;day&quot;; 
+let stateone = false; // The switch
+// you can add more statemants for maps
+
+// 2. CONFIGURATION: Normal Maps (Clean City)
+const dayMap = {
+    &quot;street.html&quot;: { &#x27;w&#x27;: &#x27;park.html&#x27;, &#x27;a&#x27;: &#x27;sidewalk.html&#x27; }
+
+const eveningMap = {
+    &quot;street.html&quot;: { &#x27;w&#x27;: &#x27;park_sunset.html&#x27; }
+}
+
+const nightMap = {
+    &quot;street.html&quot;: { &#x27;w&#x27;: &#x27;park_sunset.html&#x27; }
+}
+
+// 3. CONFIGURATION: Crashed Maps (Post-Accident)
+const stateoneMaps = {
+
+};
+
+// map changing with time(day,evening,night),user can add more
+setTimeout(() =&gt; {
+    if(currentworld = dayMap) currentworld = eveningMap ;
+    if(currentworld = eveningMap) currentworld = eveningMap ;
+    if(currentworld = nightMap)   currentworld = nightMap ;
+
+}, 1000 * 60); // time changes after each minute
+
+// --- KEYBOARD NAVIGATION ENGINE ---
+window.addEventListener(&#x27;keydown&#x27;, (event) =&gt; {
+    const keyPressed = event.key.toLowerCase();
+    const iframe = document.getElementById(&#x27;myIframe&#x27;);
+    if (!iframe) return;
+
+    let currentPath = iframe.getAttribute(&#x27;src&#x27;) || &quot;&quot;;
+    let currentFile = decodeURIComponent(currentPath.split(&#x27;/&#x27;).pop().split(&#x27;?&#x27;)[0]);
+
+
+
+    let currentWorld;
+
+if (caseone === true) {
+    currentWorld = stateoneMaps;
+} else {
+    currentWorld = dayMaps;
+}
+
+
+
+    // STEP 2: Get the specific map for the current TIME
+    const timeSpecificMap = currentWorld[currentTime];
+    const activeMap = timeSpecificMap[currentFile];
+
+    if (activeMap &amp;&amp; activeMap[keyPressed]) {
+
+        // SPECIAL TRIGGER: suppose If user is at the street and hits &#x27;w&#x27;, crash the car
+        if (!crashedCar &amp;&amp; currentFile === &quot;street.html&quot; &amp;&amp; keyPressed === &quot;w&quot;) {
+            crashedCar = true;
+            console.log(&quot;CRASH DETECTED! Switching to crashedMaps logic.&quot;); // you can change this section according to state 
+        }
+
+        activeSide = null; 
+        const nextScene = activeMap[keyPressed];
+        iframe.src = nextScene;
+
+        applyEffect(iframe);
+    }
+});
+
+function applyEffect(frame) {
+    frame.style.opacity = &quot;0.7&quot;;
+    setTimeout(() =&gt; { frame.style.opacity = &quot;1&quot;; }, 200);
+}
+    // SYSTEM: Trigger specific function if current iframe is street.html
+    if (currentFile === &quot;street.html&quot;) {
+        handleStreetEvents(keyPressed);
+    }</code></pre></div></div>
+        <div class="fixes"><h4>What changed</h4><ul>
+          <li><code>dayMap</code> was missing its closing <code>}</code>, which stopped the whole file from running.</li>
+          <li><code>stateone = true/false</code> is not valid JavaScript and ran before <code>stateone</code> existed. It's now an optional, commented example.</li>
+          <li>The time switch used <code>=</code> (assign) instead of <code>===</code> (compare), used an undeclared <code>currentworld</code>, and only ran once. It's now a <code>setInterval</code> that loops day → evening → night.</li>
+          <li><code>caseone</code>, <code>dayMaps</code>, <code>crashedCar</code> and <code>activeSide</code> were never declared. They now use <code>stateone</code> and <code>normalWorld</code>.</li>
+          <li>The engine reads <code>currentWorld[currentTime][file]</code>, so the maps are now grouped by time in <code>normalWorld</code> and <code>stateoneMaps</code>.</li>
+          <li>The street-event code sat outside the key handler, where <code>keyPressed</code> doesn't exist. It's moved inside, and <code>handleStreetEvents()</code> is defined.</li>
+          <li>Keys now keep working after the player clicks the game, because the engine also listens inside each map. Maps can also send keys with <code>postMessage</code>, which works on hosts that block access between frames.</li>
+          <li>Night map now points to <code>park_night.html</code> instead of reusing the sunset map. Change it back if you meant that.</li>
+          <li>Added <code>window.getGameTime()</code> so maps can ask the time and play matching animations.</li>
+        </ul></div>
+      </section>
+
+    </div>
+  </div>
+</div>
+</main>
+<footer>
+  <div class="wrap">
+    <span>YJD GameTech (Manohari GameTech), developed by Yuvraj Kumar Jain Dhanoriya, Dabra, Madhya Pradesh.</span>
+    <span><a href="https://github.com/yuvrajkumarjaindhanoriya7/YJD-GAMETECH" target="_blank" rel="noopener">GitHub</a> · <a href="https://sites.google.com/view/yjdgametech" target="_blank" rel="noopener">J'S ENGINE site</a> · MIT license</span>
+  </div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="site.js"></script>
+
+</body>
+</html>

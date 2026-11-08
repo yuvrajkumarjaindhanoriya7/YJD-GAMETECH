@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="night">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animation — YJD GameTech</title>
+<meta name="description" content="Frame-by-frame animation for Manohari game maps: loops, play-once effects, day/night frames and sprite sheets.">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('yjd-theme')||'night'}catch(e){}</script>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>YJD GameTech <small>/ Manohari</small></a>
+    <nav class="links" aria-label="Main">
+      <a href="index.html" >Home</a>
+      <a href="codes.html" >Codes</a>
+      <a href="animation.html" aria-current="page">Animation</a>
+    </nav>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch day or night theme">☾ Night</button>
+  </div>
+</header>
+<main>
+
+<div class="wrap">
+  <div class="page-head">
+    <p class="eyebrow">Animation</p>
+    <h1>Bring your maps to life, one frame at a time</h1>
+    <p>YJD GameTech animates like a flipbook. A map shows one image, waits a few milliseconds, then swaps in the next one. Played fast enough, still pictures become a moving car, falling rain or a flickering lamp.</p>
+  </div>
+</div>
+
+<section style="padding-top:2rem">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Try it</h2>
+      <p>These four frames come from the demo street. Change the speed and the time of day to see how the same code behaves.</p>
+    </div>
+    <div class="anim-demo">
+      <div>
+        <div class="stage"><img id="demoImg" src="demo/frames/street-day1.svg" alt="Animated street with a moving car"></div>
+        <div class="strip" id="strip"></div>
+      </div>
+      <div class="controls">
+        <div>
+          <label for="speed">frameSpeed <output id="speedOut">300 ms</output></label>
+          <input type="range" id="speed" min="60" max="1000" step="20" value="300">
+          <p class="muted" style="font-size:.88rem;margin-top:.3rem">≈ <span id="fps">3.3</span> frames per second</p>
+        </div>
+        <div>
+          <p style="font-weight:600;font-size:.92rem">Time of day</p>
+          <div class="seg" id="timeSeg" style="margin-top:.4rem">
+            <button type="button" data-t="day" aria-pressed="true">Day</button>
+            <button type="button" data-t="evening" aria-pressed="false">Evening</button>
+            <button type="button" data-t="night" aria-pressed="false">Night</button>
+          </div>
+        </div>
+        <button class="btn btn-primary" id="playBtn" type="button" style="justify-content:center">Pause</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap two">
+    <div>
+      <p class="eyebrow">How it works</p>
+      <h2>Four lines do the work</h2>
+      <ul class="muted" style="margin-left:1.1rem;display:grid;gap:.5rem;margin-top:.8rem">
+        <li><code>images</code> is the list of frames, in order.</li>
+        <li><code>currentFrame</code> remembers which frame is showing.</li>
+        <li><code>animateImages()</code> sets the <code>&lt;img&gt;</code>'s <code>src</code> to the current frame, then moves to the next.</li>
+        <li><code>setInterval(animateImages, frameSpeed)</code> repeats it every <code>frameSpeed</code> milliseconds. When the list ends, it jumps back to frame 0 and loops.</li>
+      </ul>
+    </div>
+    <div>
+      <p class="eyebrow">Choosing a speed</p>
+      <table>
+        <thead><tr><th>frameSpeed</th><th>FPS</th><th>Good for</th></tr></thead>
+        <tbody>
+          <tr><td><code>1000</code></td><td>1</td><td>Blinking signs, slow clouds</td></tr>
+          <tr><td><code>500</code></td><td>2</td><td>Gentle background loops</td></tr>
+          <tr><td><code>250</code></td><td>4</td><td>Traffic, water, flags</td></tr>
+          <tr><td><code>120</code></td><td>~8</td><td>Walking characters, fire</td></tr>
+          <tr><td><code>60</code></td><td>~16</td><td>Rain, explosions, fast action</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Code</p>
+      <h2>Animation code</h2>
+      <p>Start with your original <code>Animation.js</code>. Use the reusable version when one map needs several animations.</p>
+    </div>
+
+    <h3>1. Animation.js (your original)</h3>
+    <p class="muted">Put it at the end of a chunk that has <code>&lt;img id="main-image"&gt;</code>. It loops forever.</p>
+    <div class="code"><div class="code-head"><span class="fname">Animation.js</span><button type="button" data-copy>Copy</button><button type="button" data-download="Animation.js">Download</button></div><pre><code class="language-javascript">// Images used in animation
+const images = [
+    &quot;image1.jpg&quot;,
+    &quot;image2.jpg&quot;,
+    &quot;image3.jpg&quot;,
+    &quot;image4.jpg&quot;
+];
+
+// Animation settings
+let currentFrame = 0;
+let frameSpeed = 500; // milliseconds
+
+const mainImage = document.getElementById(&quot;main-image&quot;);
+
+// Display images one after another
+function animateImages() {
+
+    mainImage.src = images[currentFrame];
+
+    currentFrame++;
+
+    if (currentFrame &gt;= images.length) {
+        currentFrame = 0;
+    }
+
+}
+
+// Start animation
+setInterval(animateImages, frameSpeed);</code></pre></div>
+
+    <h3 style="margin-top:2.5rem">2. Reusable playAnimation()</h3>
+    <p class="muted">The same idea wrapped in a function. It preloads frames, can play once or loop, and returns a stop function. You can run several animations on one map.</p>
+    <div class="code"><div class="code-head"><span class="fname">animation.js</span><button type="button" data-copy>Copy</button><button type="button" data-download="animation.js">Download</button></div><pre><code class="language-javascript">// =============================================================
+//  animation.js — reusable frame animation for YJD GameTech
+//  Usage:  playAnimation(&quot;main-image&quot;, [&quot;a1.png&quot;,&quot;a2.png&quot;], 120);
+// =============================================================
+
+function playAnimation(elementId, frames, frameSpeed = 500, loop = true) {
+    const el = document.getElementById(elementId);
+    if (!el || frames.length === 0) return null;
+
+    // Preload so frames don&#x27;t flicker the first time
+    frames.forEach(src =&gt; { const img = new Image(); img.src = src; });
+
+    let currentFrame = 0;
+    el.src = frames[0];
+
+    const timer = setInterval(() =&gt; {
+        currentFrame++;
+        if (currentFrame &gt;= frames.length) {
+            if (!loop) { clearInterval(timer); return; } // play once
+            currentFrame = 0;                             // loop
+        }
+        el.src = frames[currentFrame];
+    }, frameSpeed);
+
+    // Return a &quot;stop&quot; button you can call later
+    return () =&gt; clearInterval(timer);
+}
+
+// ---- Examples -----------------------------------------------
+
+// 1. Background that loops forever (rain, traffic, water)
+playAnimation(&quot;main-image&quot;, [
+    &quot;street1.jpg&quot;, &quot;street2.jpg&quot;, &quot;street3.jpg&quot;, &quot;street4.jpg&quot;
+], 500);
+
+// 2. Play once — e.g. an explosion or a door opening
+// playAnimation(&quot;door&quot;, [&quot;door1.png&quot;,&quot;door2.png&quot;,&quot;door3.png&quot;], 120, false);
+
+// 3. Stop an animation later
+// const stopRain = playAnimation(&quot;rain&quot;, [&quot;r1.png&quot;,&quot;r2.png&quot;], 100);
+// setTimeout(stopRain, 5000);</code></pre></div>
+
+    <h3 style="margin-top:2.5rem">3. Frames that follow the time of day</h3>
+    <p class="muted">Uses <code>getGameTime()</code> from the ready-to-use <a href="codes.html#engine">engine.js</a>. The street in the home-page demo works this way. Load <code>animation.js</code> first.</p>
+    <div class="code"><div class="code-head"><span class="fname">street.html · script</span><button type="button" data-copy>Copy</button></div><pre><code class="language-javascript">// Pick different frames depending on the time of day.
+// Ask the parent page (game.html) what time it is —
+// engine.js shares it through window.getGameTime().
+function getGameTime() {
+    try { return window.parent.getGameTime(); }
+    catch (e) { return &quot;day&quot;; }
+}
+
+const framesByTime = {
+    day:     [&quot;street-day1.jpg&quot;,   &quot;street-day2.jpg&quot;],
+    evening: [&quot;street-eve1.jpg&quot;,   &quot;street-eve2.jpg&quot;],
+    night:   [&quot;street-night1.jpg&quot;, &quot;street-night2.jpg&quot;]
+};
+
+let stop = playAnimation(&quot;main-image&quot;, framesByTime[getGameTime()], 400);
+let lastTime = getGameTime();
+
+// Every second, check if the time changed and swap the frames
+setInterval(() =&gt; {
+    const now = getGameTime();
+    if (now !== lastTime) {
+        lastTime = now;
+        if (stop) stop();
+        stop = playAnimation(&quot;main-image&quot;, framesByTime[now], 400);
+    }
+}, 1000);</code></pre></div>
+
+    <h3 style="margin-top:2.5rem">4. Sprite sheet (CSS only)</h3>
+    <p class="muted">Put all frames side by side in one image. CSS slides through them with <code>steps()</code>. It's one download and very smooth, which suits characters.</p>
+    <div class="code"><div class="code-head"><span class="fname">sprite example</span><button type="button" data-copy>Copy</button><button type="button" data-download="sprite.html">Download</button></div><pre><code class="language-markup">&lt;!-- One image that holds all frames side by side: walk.png (4 frames, 64px each) --&gt;
+&lt;div class=&quot;hero&quot;&gt;&lt;/div&gt;
+
+&lt;style&gt;
+.hero {
+    width: 64px;
+    height: 64px;
+    background: url(&quot;walk.png&quot;) 0 0 no-repeat;
+    animation: walk 0.6s steps(4) infinite;  /* 4 frames */
+    image-rendering: pixelated;
+}
+@keyframes walk {
+    to { background-position: -256px 0; }  /* 4 x 64px */
+}
+&lt;/style&gt;</code></pre></div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head"><p class="eyebrow">Tips</p><h2>Make animations look good</h2></div>
+    <div class="cards">
+      <div class="card"><h3>Same size frames</h3><p>Export every frame at the same width and height, or the picture will jump.</p></div>
+      <div class="card"><h3>Number your files</h3><p>Name frames <code>walk1.png</code>, <code>walk2.png</code>… so the order is obvious in the list.</p></div>
+      <div class="card"><h3>Few frames, good loop</h3><p>4 to 8 frames is plenty. Make the last frame lead naturally back into the first.</p></div>
+      <div class="card"><h3>Keep files light</h3><p>Use compressed JPG/WebP for scenes and PNG for transparent sprites. Small files keep the engine fast on any device.</p></div>
+    </div>
+  </div>
+</section>
+</main>
+<footer>
+  <div class="wrap">
+    <span>YJD GameTech (Manohari GameTech), developed by Yuvraj Kumar Jain Dhanoriya, Dabra, Madhya Pradesh.</span>
+    <span><a href="https://github.com/yuvrajkumarjaindhanoriya7/YJD-GAMETECH" target="_blank" rel="noopener">GitHub</a> · <a href="https://sites.google.com/view/yjdgametech" target="_blank" rel="noopener">J'S ENGINE site</a> · MIT license</span>
+  </div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="site.js"></script>
+<script>
+(function(){
+  const img=document.getElementById('demoImg'), strip=document.getElementById('strip');
+  const speed=document.getElementById('speed'), out=document.getElementById('speedOut'), fps=document.getElementById('fps');
+  const playBtn=document.getElementById('playBtn');
+  let time='day', frame=0, timer=null, playing=true;
+  const frames=()=>[1,2,3,4].map(i=>`demo/frames/street-${time}${i}.svg`);
+  ['day','evening','night'].forEach(t=>[1,2,3,4].forEach(i=>{const p=new Image();p.src=`demo/frames/street-${t}${i}.svg`;}));
+  function drawStrip(){ strip.innerHTML=frames().map((s,i)=>`<figure data-i="${i}"><img src="${s}" alt="Frame ${i+1}"><figcaption>${i+1}</figcaption></figure>`).join(''); mark(); }
+  function mark(){ strip.querySelectorAll('figure').forEach(f=>f.classList.toggle('on',+f.dataset.i===frame)); }
+  function tick(){ img.src=frames()[frame]; mark(); frame=(frame+1)%4; }
+  function start(){ clearInterval(timer); if(playing) timer=setInterval(tick,+speed.value); }
+  speed.addEventListener('input',()=>{ out.textContent=speed.value+' ms'; fps.textContent=(1000/speed.value).toFixed(1); start(); });
+  document.querySelectorAll('#timeSeg button').forEach(b=>b.addEventListener('click',()=>{ time=b.dataset.t; document.querySelectorAll('#timeSeg button').forEach(x=>x.setAttribute('aria-pressed',x===b)); drawStrip(); img.src=frames()[frame]; }));
+  playBtn.addEventListener('click',()=>{ playing=!playing; playBtn.textContent=playing?'Pause':'Play'; start(); });
+  drawStrip(); tick(); start();
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="night">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YJD GameTech — Manohari Game Engine</title>
+<meta name="description" content="Build browser game worlds from plain HTML files with the Manohari engine: keyboard maps, day/night cycle, story states and frame animation.">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('yjd-theme')||'night'}catch(e){}</script>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span>YJD GameTech <small>/ Manohari</small></a>
+    <nav class="links" aria-label="Main">
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="codes.html" >Codes</a>
+      <a href="animation.html" >Animation</a>
+    </nav>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch day or night theme">☾ Night</button>
+  </div>
+</header>
+<main>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Manohari Game Engine · by YJD GameTech</p>
+      <h1>Build a living game world from <em>plain HTML files</em>.</h1>
+      <p class="lead">Every place in your game is its own HTML page. <code>engine.js</code> links them with W A S D, cycles day, evening and night, and switches the world when your story changes. It runs in any browser, even on low-end hardware.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#tutorial">Start the tutorial</a>
+        <a class="btn btn-ghost" href="codes.html">Get the code</a>
+      </div>
+    </div>
+    <div class="demo-card">
+      <div class="demo-frame"><iframe src="demo/game.html" title="Playable YJD GameTech demo" id="heroDemo"></iframe></div>
+      <div class="demo-bar">
+        <span>Click the scene, then press <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd>. Time changes every 20 seconds.</span>
+        <a href="demo/game.html" target="_blank" rel="noopener">Open full screen ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="what">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">What it is</p>
+      <h2>Three ideas run the whole engine</h2>
+    </div>
+    <div class="cards">
+      <div class="card"><div class="num">01 · Chunks</div><h3>Every map is a page</h3><p>Streets, parks and caves are separate HTML files called chunks. You can design them with images, CSS or a canvas.</p></div>
+      <div class="card"><div class="num">02 · Map tables</div><h3>Keys connect the maps</h3><p>A small JavaScript object says “from <code>street.html</code>, pressing W goes to <code>park.html</code>.” That's all the level design code you need.</p></div>
+      <div class="card"><div class="num">03 · Time + states</div><h3>The world changes</h3><p>Separate map tables for day, evening and night, plus story switches like <code>stateone</code>, let the same key lead somewhere new.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">How it works</p>
+      <h2>One window, many maps</h2>
+      <p>The player always stays on <code>game.html</code>. Only the iframe inside it changes.</p>
+    </div>
+    <div class="flow">
+      <div class="node"><b>game.html</b><span>Holds one <code>&lt;iframe id="myIframe"&gt;</code> and loads engine.js.</span></div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="node"><b>engine.js</b><span>Reads the key you pressed, the current time and the state, then finds the next map.</span></div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="node"><b>chunk.html</b><span>The iframe's <code>src</code> becomes the new map, with a quick fade.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="tutorial">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Tutorial</p>
+      <h2>Make your first game in 7 steps</h2>
+      <p>You only need a text editor and a browser. The full files are on the <a href="codes.html">Codes page</a>.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div>
+        <h3>Create the project folder</h3>
+        <p>Keep every file in one folder. The engine reads file names, so name maps clearly and use lowercase.</p>
+        <div class="code"><div class="code-head"><span class="fname">folder structure</span><button type="button" data-copy>Copy</button></div><pre><code class="language-none">my-game/
+├── game.html          ← the window your game runs in
+├── engine.js          ← moves the player between maps
+├── animation.js       ← (optional) frame animation helper
+├── street.html        ← a map &quot;chunk&quot;
+├── park.html
+├── park_sunset.html
+├── park_night.html
+├── sidewalk.html
+└── images/            ← your scene pictures and animation frames</code></pre></div>
+      </div></div>
+
+      <div class="step"><div>
+        <h3>Make the game window</h3>
+        <p>Copy <a href="codes.html#game">game.html</a>. Set the iframe's <code>src</code> to the first map the player sees, for example <code>street.html</code>. The iframe must keep <code>id="myIframe"</code>.</p>
+      </div></div>
+
+      <div class="step"><div>
+        <h3>Draw your maps (chunks)</h3>
+        <p>Each map is a full-screen HTML page. The simplest chunk is one picture. Use the <a href="codes.html#chunk">chunk.html</a> template if the map should be animated.</p>
+        <div class="code"><div class="code-head"><span class="fname">park.html</span><button type="button" data-copy>Copy</button></div><pre><code class="language-markup">&lt;!-- park.html — one map of your world --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body style=&quot;margin:0; overflow:hidden; background:#000&quot;&gt;
+    &lt;img src=&quot;images/park.jpg&quot; alt=&quot;Park&quot;
+         style=&quot;width:100vw; height:100vh; object-fit:cover; display:block&quot;&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div>
+      </div></div>
+
+      <div class="step"><div>
+        <h3>Connect maps with keys</h3>
+        <p>In <a href="codes.html#engine">engine.js</a>, list every map and where each key leads. Remember to add a way back, or the player gets stuck.</p>
+        <div class="code"><div class="code-head"><span class="fname">engine.js · dayMap</span><button type="button" data-copy>Copy</button></div><pre><code class="language-javascript">const dayMap = {
+    &quot;street.html&quot;:   { w: &quot;park.html&quot;, a: &quot;sidewalk.html&quot; }, // W = forward, A = left
+    &quot;park.html&quot;:     { s: &quot;street.html&quot; },                   // S = back
+    &quot;sidewalk.html&quot;: { d: &quot;street.html&quot; }                    // D = right
+};</code></pre></div>
+      </div></div>
+
+      <div class="step"><div>
+        <h3>Add day, evening and night</h3>
+        <p>Copy your day table into <code>eveningMap</code> and <code>nightMap</code>, then point keys to night versions of your maps. Group them in <code>normalWorld</code>. The engine moves to the next time every <code>TIME_STEP</code>.</p>
+        <div class="code"><div class="code-head"><span class="fname">engine.js · time</span><button type="button" data-copy>Copy</button></div><pre><code class="language-javascript">const eveningMap = {
+    &quot;street.html&quot;:      { w: &quot;park_sunset.html&quot; },
+    &quot;park_sunset.html&quot;: { s: &quot;street.html&quot; }
+};
+
+const normalWorld = { day: dayMap, evening: eveningMap, night: nightMap };
+
+const TIME_STEP = MINUTE;   // try 1000 * 20 while testing</code></pre></div>
+      </div></div>
+
+      <div class="step"><div>
+        <h3>Change the story with states</h3>
+        <p>A state is a true/false switch. When it turns on, the engine reads <code>stateoneMaps</code> instead, so the world can change after an event like a car crash.</p>
+        <div class="code"><div class="code-head"><span class="fname">engine.js · stateone</span><button type="button" data-copy>Copy</button></div><pre><code class="language-javascript">let stateone = false;   // false = normal city, true = after the crash
+
+// inside handleKey():
+if (!stateone &amp;&amp; currentFile === &quot;street.html&quot; &amp;&amp; keyPressed === &quot;w&quot;) {
+    stateone = true;    // from now on the engine reads stateoneMaps
+}
+
+const stateoneMaps = {
+    day: { &quot;park.html&quot;: { s: &quot;street_crashed.html&quot; } }
+};</code></pre></div>
+      </div></div>
+
+      <div class="step"><div>
+        <h3>Animate and test</h3>
+        <p>Bring maps to life with frame animation (see the <a href="animation.html">Animation page</a>). Open the folder with a local server, for example the VS Code Live Server extension, so the iframe and engine can talk to each other. Then press W A S D.</p>
+        <div class="code"><div class="code-head"><span class="fname">street.html</span><button type="button" data-copy>Copy</button></div><pre><code class="language-markup">&lt;img id=&quot;main-image&quot; src=&quot;images/street1.jpg&quot; alt=&quot;Street&quot;&gt;
+
+&lt;script src=&quot;animation.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+    playAnimation(&quot;main-image&quot;, [
+        &quot;images/street1.jpg&quot;, &quot;images/street2.jpg&quot;,
+        &quot;images/street3.jpg&quot;, &quot;images/street4.jpg&quot;
+    ], 300); // 300 ms per frame
+&lt;/script&gt;</code></pre></div>
+        <ul>
+          <li>Press <kbd>F12</kbd> and open the Console to see “Time is now: evening” and crash messages.</li>
+          <li>Shorten <code>TIME_STEP</code> while testing, then set it back.</li>
+        </ul>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<section id="next">
+  <div class="wrap">
+    <div class="cards">
+      <a class="card" href="codes.html" style="text-decoration:none;color:inherit"><div class="num">Next</div><h3>Codes →</h3><p>Ready-to-use game.html, chunk.html and engine.js, with your originals side by side.</p></a>
+      <a class="card" href="animation.html" style="text-decoration:none;color:inherit"><div class="num">Next</div><h3>Animation →</h3><p>Frame animation, play-once effects, day/night frames and sprite sheets.</p></a>
+      <a class="card" href="https://github.com/yuvrajkumarjaindhanoriya7/YJD-GAMETECH" target="_blank" rel="noopener" style="text-decoration:none;color:inherit"><div class="num">Source</div><h3>GitHub ↗</h3><p>The main repository for Manohari GameTech.</p></a>
+    </div>
+  </div>
+</section>
+</main>
+<footer>
+  <div class="wrap">
+    <span>YJD GameTech (Manohari GameTech), developed by Yuvraj Kumar Jain Dhanoriya, Dabra, Madhya Pradesh.</span>
+    <span><a href="https://github.com/yuvrajkumarjaindhanoriya7/YJD-GAMETECH" target="_blank" rel="noopener">GitHub</a> · <a href="https://sites.google.com/view/yjdgametech" target="_blank" rel="noopener">J'S ENGINE site</a> · MIT license</span>
+  </div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="site.js"></script>
+
+</body>
+</html>
